@@ -1,0 +1,5 @@
+// read line
+// line != STOP
+    print = line
+    read line
+    (loop)

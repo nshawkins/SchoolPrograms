@@ -1,0 +1,38 @@
+// use scanner if you cannot use argments when running such as java example _____
+// '\t' is equivalent to 'tab'
+
+/* n=14 cant work. must be int n = 14. compiler needs clarification on data types
+primitive data types are:
+integers 'all mnumbers'
+double 'floating point numbers'
+short
+char 'single characters'
+boolean
+long
+float
+byte
+*/
+
+// for NOT use !x, for and use '&&', for OR use '||'
+// overflow numbers are generally negative. use 'long' data type for large numbers
+
+in an if statement, you cannot use boolean arguments with string. it defaults to false
+to compate strings, use:
+___(string 1).equals(_____(string2))
+str1 less-than str2 = str1.compareTo(Str2) < 0
+str1 equal to str2 = str1.compareTo(Str2) == 0
+str1 greater-than str2 = str1.compareTo(Str2) > 0
+
+use .charAt() to get a character during a string
+
+i++ = (i = i + 1)
+
+array = double[] = new double[10]
+        a list of 10 double numbers
+'new' is a keyword for a computer to allocate space for memory
+
+void = returns nothing (also "return;" returns void)
+
+for a function:
+public static [data type (double, int...)] [function name] ([data type][argument variable], [data type][argument variable] (if multiple))
+public static int sum(int x, int y){}

@@ -1,0 +1,122 @@
+package com.example.example;
+import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
+import android.view.View;
+import android.widget.TextView;
+import android.widget.Button;
+import java.lang.String;
+import java.lang.CharSequence;
+
+public class MainActivity extends AppCompatActivity {
+
+    String priorOp = "";
+    double priorNum = 0;
+    boolean newnum = true;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+    }
+
+
+    // Generic Function for Numbers
+    public void buttonPressed(View view){
+        Button button = (Button) view;
+        TextView result = findViewById(R.id.text_result);
+
+        if (button.getText().equals("AC")){
+            result.setText("0");
+
+            priorOp = "";
+            priorNum = 0;
+        }
+
+        else if (button.getText().equals("+/-")){
+            double val = Double.parseDouble(result.getText().toString());
+            val = val * -1 ;
+            String str = "" + val;
+            result.setText(str);
+        }
+
+        else if (button.getText().equals("%")){
+            double val = Double.parseDouble(result.getText().toString());
+            val = val / 100;
+            String str = "" + val;
+            result.setText(str);
+        }
+        else if (button.getText().equals("=")){
+            if (!priorOp.equals("")){
+                String str = "";
+
+                if (priorOp.equals("+")){
+                    double total = Double.parseDouble(result.getText().toString()) + priorNum;
+                    str = "" + total;
+                }
+
+                else if (priorOp.equals("÷")){
+                    double total = priorNum / Double.parseDouble(result.getText().toString());
+                    str = "" + total;
+                }
+
+                else if (priorOp.equals("-")){
+                    double total = priorNum - Double.parseDouble(result.getText().toString());
+                    str = "" + total;
+                }
+
+                else if (priorOp.equals("X")){
+                    double total = priorNum * Double.parseDouble(result.getText().toString());
+                    str = "" + total;
+                }
+                result.setText(str);
+            }
+            priorOp = "";
+            priorNum = Double.parseDouble(result.getText().toString());
+            newnum = true;
+        }
+
+        else if (button.getText().equals("+") || button.getText().equals("÷") || button.getText().equals("-") || button.getText().equals("X") ){
+            if (!priorOp.equals("")){
+                String str = "";
+
+                if (priorOp.equals("+")){
+                    double total = Double.parseDouble(result.getText().toString()) + priorNum;
+                    str = "" + total;
+                }
+
+                else if (priorOp.equals("÷")){
+                    double total = priorNum / Double.parseDouble(result.getText().toString());
+                    str = "" + total;
+                }
+
+                else if (priorOp.equals("-")){
+                    double total = priorNum - Double.parseDouble(result.getText().toString());
+                    str = "" + total;
+                }
+
+                else if (priorOp.equals("X")){
+                    double total = priorNum * Double.parseDouble(result.getText().toString());
+                    str = "" + total;
+                }
+                result.setText(str);
+            }
+            priorNum = Double.parseDouble(result.getText().toString());
+            priorOp = button.getText().toString();
+            newnum = true;
+        }
+
+        else{
+            if (!result.getText().equals("0")){
+                if (newnum){
+                    result.setText("");
+                    newnum = false;
+                }
+                String temp = result.getText().toString();
+                result.setText(temp + button.getText());
+            }
+            else{
+                result.setText(button.getText());
+            }
+        }
+    }
+}

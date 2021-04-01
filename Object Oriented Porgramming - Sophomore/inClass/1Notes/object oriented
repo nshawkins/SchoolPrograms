@@ -1,0 +1,14 @@
+import java.util.LinkedList;
+
+public class primes{
+    public static int sum() {
+
+    }
+
+    public static void print(){
+        
+    }
+    public static void main(String[] args){
+
+    }
+}

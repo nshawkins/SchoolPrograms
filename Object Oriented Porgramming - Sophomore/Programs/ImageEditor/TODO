@@ -1,0 +1,13 @@
+TODO:
+
+PGM pgm = new PGM("input.pgm");	creates a PGM object from input.pgm.
+int[][] = pgm.getPixels();	returns a 2D integer array of pixel values.
+pgm.flip_vertically();	flips the pixel values vertically.
+pgm.flip_horizontally();	flips the pixel values horizontally.
+pgm.rotate_right_90();	rotates the pixel values 90 degrees to the right.
+
+Hint:
+
+    PrintWriter writer = new PrintWriter("out.txt");
+    writer.println("hello");
+    writer.close();

@@ -1,0 +1,10 @@
+Mark Twain, Huckleberry Finn, Classics, Murica,1888,;
+Barack Obama, Presidential Baller, ISIS, Washington DC,2016,;
+Donald Trump, Chesebroger, MAGA, Alabuma,2018,;
+Chester Cheetah, Raising Kids in Your 30s, Cheeto, China,1999,;
+Hillary Clinton, Chillin in Cedar Rapids, Chill, Cedar Rapids,2017,;
+Eugene Krabs, Be Frugal, KrabTalk, Bikini Bottom,2000,;
+Keanu Reeves, Bluepilled, MatrixCon, Los Angeles,2002,;
+Tom Cruise, Letters to Xenu, SciCon, California,2005,;
+Tim Heidecker, My Early Life, VidCon, Sacramento,2009,;
+Kurt Cobain, Un-armed, ShottyCon, Aberdeen,1994,;

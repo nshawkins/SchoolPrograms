@@ -1,0 +1,5 @@
+static functions can only be called inside static functions
+non static functions cannot be called inside a static function
+
+abstract class = class that has one or more abstract methods
+method = empty function 

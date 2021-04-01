@@ -1,0 +1,188 @@
+package com.example.example;
+
+import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
+import android.view.View;
+import android.widget.TextView;
+import android.widget.Button;
+
+public class MainActivity extends AppCompatActivity {
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+    }
+
+    /*public void ZeroPressed(View view) {
+        TextView result = findViewById(R.id.text_result);
+        if (!result.getText().equals("0")){
+            String current = result.getText().toString();
+            result.setText(current + "0");
+        }
+        else {
+            result.setText("0");
+        }
+    }
+
+    public void OnePressed(View view) {
+        TextView result = findViewById(R.id.text_result);
+        if (!result.getText().equals("0")){
+            String current = result.getText().toString();
+            result.setText(current + "1");
+        }
+        else {
+            result.setText("1");
+        }
+    }
+
+    public void TwoPressed(View view) {
+        TextView result = findViewById(R.id.text_result);
+        if (!result.getText().equals("0")){
+            String current = result.getText().toString();
+            result.setText(current + "2");
+        }
+        else {
+            result.setText("2");
+        }
+    }
+
+    public void ThreePressed(View view) {
+        TextView result = findViewById(R.id.text_result);
+        if (!result.getText().equals("0")){
+            String current = result.getText().toString();
+            result.setText(current + "3");
+        }
+        else {
+            result.setText("3");
+        }
+    }
+
+    public void FourPressed(View view) {
+        TextView result = findViewById(R.id.text_result);
+        if (!result.getText().equals("0")){
+            String current = result.getText().toString();
+            result.setText(current + "4");
+        }
+        else {
+            result.setText("4");
+        }
+    }
+
+    public void FivePressed(View view) {
+        TextView result = findViewById(R.id.text_result);
+        if (!result.getText().equals("0")){
+            String current = result.getText().toString();
+            result.setText(current + "5");
+        }
+        else {
+            result.setText("5");
+        }
+    }
+
+    public void SixPressed(View view) {
+        TextView result = findViewById(R.id.text_result);
+        if (!result.getText().equals("0")){
+            String current = result.getText().toString();
+            result.setText(current + "6");
+        }
+        else {
+            result.setText("6");
+        }
+    }
+
+    public void SevenPressed(View view){
+        TextView result = findViewById(R.id.text_result);
+        if (!result.getText().equals("0")){
+            String current = result.getText().toString();
+            result.setText(current + "7");
+        }
+        else {
+            result.setText("7");
+        }
+    }
+
+    public void EightPressed(View view) {
+        TextView result = findViewById(R.id.text_result);
+        if (!result.getText().equals("0")){
+            String current = result.getText().toString();
+            result.setText(current + "8");
+        }
+        else {
+            result.setText("8");
+        }
+    }
+
+    public void NinePressed(View view) {
+        TextView result = findViewById(R.id.text_result);
+        if (!result.getText().equals("0")){
+            String current = result.getText().toString();
+            result.setText(current + "9");
+        }
+        else {
+            result.setText("9");
+        }
+    }
+
+    public void Multiplication(View view) {
+
+    }
+
+    public void DividePressed(View view) {
+
+    }
+
+    public void AdditionPressed(View view) {
+
+    }
+
+    public void MinusPressed(View view) {
+
+    }
+
+    public void DecimalPressed(View view) {
+
+    }
+
+    public void EqualsPressed(View view) {
+
+    }
+    */
+    public void ButtonPressed(View view){
+        Button button = (Button) view;
+
+        TextView result = findViewById(R.id.text_result);
+
+        if (button.getText().equals("AC")){
+            result.setText("0");
+        }
+        if (button.getText().equals("+/-")){
+            int de = Integer.parseInt(result.getText().toString());
+        }
+        if (button.getText().equals("%")){
+            int de = Integer.parseInt(result.getText().toString());
+        }
+        if (button.getText().equals("÷")){
+            int de = Integer.parseInt(result.getText().toString());
+        }
+        if (button.getText().equals("×")){
+            int de = Integer.parseInt(result.getText().toString());
+        }
+        if (button.getText().equals("-")){
+            int de = Integer.parseInt(result.getText().toString());
+        }
+        if (button.getText().equals("+")){
+            int de = Integer.parseInt(result.getText().toString());
+        }
+        if (button.getText().equals("=")){
+            int de = Integer.parseInt(result.getText().toString());
+        }
+        if (!result.getText().equals("0")){
+            String tmp = result.getText().toString();
+            result.setText(tmp + button.getText());
+        }
+        else {
+            result.setText(button.getText());
+        }
+    }
+}

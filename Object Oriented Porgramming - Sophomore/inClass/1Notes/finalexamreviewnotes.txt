@@ -1,0 +1,46 @@
+OBJECT-ORIENTED PROGRAMMING FINAL EXAM REVIEW: NOTES
+
+In Java, there are 8 primitive data types:
+- int
+- double
+- short
+- char
+-boolean
+-long
+-float
+-byte
+
+*(String is not a primitive data type!!)*
+
+int : integers (-2, 0, 1, 937)
+char : character ('a', 'Z')
+double : floating-point numbers (3.1415)
+boolean : truthity/falsity (true, false)
+String : sequence of characters ("abcdEF 124 $2_ + ")
+
+Reserved keys for Escape Sequences:
+
+\t : tab
+\n : newline
+\b : backspace
+\' : single quote
+\" : double quote
+\\ : backslash
+
+OUTPUT FORMATTING: FORMAT SPECIFIERS
+
+%c (char) : prints a single Unicode character
+%d (int, long, short) : prints a decimal integer value.
+%0 (int, long, short) : prints an octal integer value.
+%h (int, char, long, short) : prints a hexadecimal integer value.
+%f (float, double) : prints a floating-point value.
+%e (float, double) : prints a floating-point value in scientific notation.
+%s (String) : Prints the characters in a String variable or literal. 
+%% : Prints the '%' character.
+%n : Prints the platform-specific new-line character. 
+
+
+
+
+
+
