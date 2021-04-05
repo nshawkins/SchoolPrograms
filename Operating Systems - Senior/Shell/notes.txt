@@ -1,0 +1,82 @@
+standard run means run and wait
+& = run dont wait
+
+dont make seperate programs for the exit, bg, wait
+
+exit means exit the program without considering child processes
+
+bg prints out process IDs
+
+wait waits until all background/child processes finish
+    call wait each time a child is born 
+    if you get back a child number that isnt in a list of child numbers then throw an error to the ERROR OUTPUT STREAM
+        Make it as infomative as possible (not tested systematically)
+
+
+Working with Parse.c
+    command cmd 
+    char *line
+    char buffer[1000]
+    int returnCode = parse(line, &cmd) // 0 is good, -num is bad (probably syntax error)
+    if(rc = 0){
+        you can use cmd
+
+        //if input is ls *.txt > out.txt
+        cmd.argv[0]
+        strcmp(cmd.output, "out.txt") == 0
+        string str = cmd.output
+        // cmd.input works also
+
+        //if input is & sort > out.txt < in.txt
+        cmd.bg == 1 //because of &
+    }
+
+bg-
+    bg should clear after wait
+    
+    shell> &ls > dir1.txt
+    shell> & ls > dir2.txt
+    shell> & echo hi mom > hi.txt
+    shell> bg
+    [idnum1] [idnum2] [idnum3]
+    shell>
+
+    //to test bg:
+    $ shell < cmds.txt
+
+    cmds.txt:
+    ------------
+    &ls > dir1.txt
+    & ls > dir2.txt
+    & echo hi mom > hi.txt
+    bg
+
+wait waits for EVERY child process to be done before printing shell>
+
+shell needs to end at end of input also
+
+call fork then exec
+    fork makes a new process
+    exec changes the new process into the new program
+
+for ui redirection
+fork->file operations-> exec *******
+
+& ls > dir1.txt
+command.bg = 1
+command.argc = 1 //one command that ls sees (name of itself)
+command.argv[0] = "ls"
+command.argv[1] = ??? //only one thing in the array
+command.input = NULL
+command.output = "dir.txt"
+
+MUST CLOSE INPUT AND OUTPUT FILES
+    close()
+    1 is num of stdout
+        close number 1 file (second file)
+    open()
+        returns num of file that got opened
+            if -num then it cant open
+            else its 0 1 2...
+
+PRINT zombie! if there is a process running in the background and you try to exit
