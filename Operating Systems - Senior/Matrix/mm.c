@@ -48,7 +48,11 @@ int cmpfunc (const void * a, const void * b) {
 void mult_matrices(){
     matAnsVals = (int**)malloc(250000 * sizeof(int *));
     matAnsSize = (struct MatSize*)malloc(sizeof(int) * 200);
-    //matAns[i] = (int *)malloc((matSize[i].row * matSize[i + 1].col) * sizeof(int));
+    for(int i = 0; i < 100; i++){
+        if(matAnsSize[i].row == 0 || matAnsSize[i].col == 0) break;
+        
+        matAnsVals[i] = (int *)malloc((matSize[i].row * matSize[i + 1].col) * sizeof(int)); //CANT BE MATSIZE, NEEDS TO BE MATANSSIZE
+    }
     
 /*
     int traverse = 0;
@@ -78,7 +82,7 @@ void mult_matrices(){
     free(matSize);
 }
 
-void show_matrices(){
+void show_matrices(){ //LOGIC WORKS
     int i = 0;
     while(write(output, &matAnsSize[i], 8) > -1){
         // PRINT MATSIZE
@@ -96,7 +100,7 @@ void show_matrices(){
     }
     free(matAnsSize);
     free(matAnsVals);
-    close(input);
+    close(output);
 }
 
 //MAIN------------------------------
