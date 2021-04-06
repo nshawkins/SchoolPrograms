@@ -29,7 +29,7 @@ int main(int argc, char *argv[]){
         printf("read failed\n");
         return -1;
     }
-    if (read(input, matVal, (matSize.row * matSize.col) * 4) != -1); //return -1;
+    if (read(input, matVal, (matSize.row * matSize.col) * 4) == -1) return -1;
     close(input);
 
     //DO TRANSPOSE
@@ -51,7 +51,7 @@ int main(int argc, char *argv[]){
         printf("write failed\n");
         return -1;
     }
-    if(write(output, *transpose, (matSize.row * matSize.col) * sizeof(int)) != -1);// return -1;
+    if(write(output, *transpose, (matSize.row * matSize.col) * sizeof(int)) == -1) return -1;
 
     free(matVal);
     close(output);
