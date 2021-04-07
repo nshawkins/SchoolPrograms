@@ -19,23 +19,28 @@
 
 //FUNCTIONS-------------------------
 void read_matrices(){
-    matSize = (struct MatSize*)malloc(sizeof(int) * 200);
-    matVals = (int**)malloc(250000 * sizeof(int *));
+    matSize = (struct MatSize*)calloc(200, sizeof(int));
+    matVals = (int**)calloc(250000, sizeof(int *));
     
     int i = 0;
     while(read(input, &matSize[i], 8) > -1){
         if(matSize[i].row == 0 || matSize[i].col == 0) break;
+
         //PRINT MATSIZE
-        // printf("row: %d, col: %d\n", matSize[i].row, matSize[i].col);
-        matVals[i] = (int *)malloc((matSize[i].row * matSize[i].col) * sizeof(int));
+        printf("row: %d, col: %d\n", (int8_t)matSize[i].row, (int8_t)matSize[i].col);
+
+        matVals[i] = (int *)calloc((matSize[i].row * matSize[i].col), sizeof(int));
         if (read(input, matVals[i], (matSize[i].row * matSize[i].col) * 4) == -1){ 
             printf("read vals failed\n");
         }
+
         //PRINT MATVALS
-        // for(int j = 0; j < matSize[i].row * matSize[i].col; j++){
-        //     printf("%d ", matVals[i][j]);
-        // }
-        // printf("\n");  
+        for(int j = 0; j < matSize[i].row * matSize[i].col; j++){
+            if(j % matSize[i].col == 0 && j > 0) printf("\n");  
+            printf("%d ", (int8_t)matVals[i][j]);
+        }
+        printf("\n");  
+
         i++;
     }
     close(input);
@@ -48,43 +53,46 @@ int cmpfunc(const void *a, const void *b)
 }
 
 void mult_matrices(){
-    matAnsVals = (int**)malloc(250000 * sizeof(int *));
-    matAnsSize = (struct MatSize*)malloc(sizeof(int) * 200);
-    for(int i = 0; i < 100; i++){
-        if(matAnsSize[i].row == 0 || matAnsSize[i].col == 0) break;
-        if(matSize[i].col != matSize[i+1].row) break;
+    matAnsVals = (int**)calloc(250000, sizeof(int *));
+    matAnsSize = (struct MatSize*)calloc(200, sizeof(int));
+    for(int i = 0; i < 100; i++){ //FOR EACH MATRIX
+        if(matSize[i].row == 0 || matSize[i].col == 0) break;
+        if(matSize[i].col != matSize[i+1].row) continue;
 
         matAnsSize[i].row = matSize[i].row; 
         matAnsSize[i].col = matSize[i + 1].col;
-        matAnsVals[i] = (int *)malloc((matAnsSize[i].row * matAnsSize[i].col) * sizeof(int));
+        matAnsVals[i] = (int *)calloc((matAnsSize[i].row * matAnsSize[i].col), sizeof(int));
 
-        int traverse = 0;
-        //for mat1
-        //for mat2
+        printf("--------------------------------------------MatNum: %d\n", i);
+        
+        int ans = 0;
+        int ansPos = 0;
+        for (int j = 0; j < matAnsSize[i].row * matAnsSize[i].col; j++){ //FOR EACH POSITION IN THE ANS MATRIX
+            if(ansPos == (matAnsSize[i].row * matAnsSize[i].col)) goto sorter;
+            for(int k = 0; k < matAnsSize[i].col; k++, ansPos++){ //FOR SECOND MATRIX VALUES
+                for(int l = 0; l < matSize[i].col; l++){ //FOR FIRST MATRIX VALUES
+
+                    printf("%d * %d\n", (int8_t)matVals[i][(matSize[i].col * j) + l], (int8_t)matVals[i+1][(l * matAnsSize[i].col) + k]);
+                    ans += matVals[i][(matSize[i].col * j) + l] * matVals[i+1][(l * matAnsSize[i].col) + k];
+                    printf("ANS AFTER: %d\n", (int8_t)ans);
+                }
+                //SAVE TO ANSWER MATRIX
+
+                printf("= %d\n", (int8_t)ans);
+                printf("ANSPOS: %d\n", ansPos);
+                printf("-------------\n");
+
+                matAnsVals[i][ansPos] = ans;
+                ans = 0;
+            }
+            //SORT ROW
+            sorter:
+                qsort(&matAnsVals[i][(matAnsSize[i].col * j)], matAnsSize[i].col, sizeof(int), cmpfunc);
+                if(ansPos == (matAnsSize[i].row * matAnsSize[i].col)) break;
+        }
+        ansPos = 0;
     }
     
-/*
-    int traverse = 0;
-    for(int i = 0; i < 100; i++){
-        if(matRowCol[i][1] == matRowCol[i+1][0]){
-            for(int j = 0; j < matRowCol[i + 1][1]; j++){
-                for(int k = 0; k < matRowCol[i][0]; k++, traverse++){
-                    if (traverse == 0){
-                        matAns[j][k] = matVals[i][traverse] * matVals[i+1][j];
-                    }else{
-                        matAns[j][k] = matVals[i][traverse] * matVals[i+1][j + (matRowCol[i + 1][1] * k)];
-                    }
-                }
-            }
-        //SORT THE ROW
-        qsort(matAns[i], matRowCol[i][0], sizeof(int), cmpfunc);
-        //------------
-        traverse = 0;
-        }else{
-            continue;
-        }
-    }*/
-
     //FREE ALL DATA THAT IS NOW UNUSED
     for(int i = 0; i < (matSize[i].row * matSize[i].col); i++){
         free(matVals[i]);
@@ -96,18 +104,26 @@ void mult_matrices(){
 void show_matrices(){ //LOGIC WORKS
     int i = 0;
     while(write(output, &matAnsSize[i], 8) > -1){
+
         // PRINT MATSIZE
-        printf("row: %d, col: %d\n", matAnsSize[i].row, matAnsSize[i].col);
+        printf("row: %d, col: %d\n", (int8_t)matAnsSize[i].row, (int8_t)matAnsSize[i].col);
+
         if(matAnsSize[i].row == 0 || matAnsSize[i].col == 0) break;
+
         //PRINT MATVALS
-        for(int j = 0; j < (matAnsSize[i].row * matAnsSize[i].col); j++){
-            printf("%d ", matAnsVals[i][j]);
+        for(int j = 0; j < matAnsSize[i].row * matAnsSize[i].col; j++){
+            if(j % matAnsSize[i].col == 0 && j > 0) printf("\n");  
+            printf("%d ", (int8_t)matAnsVals[i][j]);
         }
         printf("\n");
+
         if (write(output, matAnsVals[i], (matAnsSize[i].row * matAnsSize[i].col) * 4) == -1){ 
             printf("write vals failed\n");
         }
         i++;
+    }
+    for(int i = 0; i < (matAnsSize[i].row * matAnsSize[i].col); i++){
+        free(matAnsVals[i]);
     }
     free(matAnsSize);
     free(matAnsVals);

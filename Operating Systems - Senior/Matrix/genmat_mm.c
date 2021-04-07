@@ -34,7 +34,7 @@ int main(int argc, char *argv[])
         if (write(fd,&cols,sizeof(cols)) != sizeof(cols)) goto bad;
 
         for (int j=0; j<rows*cols; j++) {
-            int x = rand();
+            int x = 1+rand()%MAX;
             if (write(fd,&x,sizeof(x)) != sizeof(x)) goto bad;
         }
     }
