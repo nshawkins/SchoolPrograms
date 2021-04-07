@@ -41,8 +41,10 @@ void read_matrices(){
     close(input);
 }
 
-int cmpfunc (const void * a, const void * b) {
-   return ( *(int*)a - *(int*)b );
+int cmpfunc(const void *a, const void *b)
+{
+   const int *A = a, *B = b;
+   return (*A > *B) - (*A < *B);
 }
 
 void mult_matrices(){
@@ -50,8 +52,15 @@ void mult_matrices(){
     matAnsSize = (struct MatSize*)malloc(sizeof(int) * 200);
     for(int i = 0; i < 100; i++){
         if(matAnsSize[i].row == 0 || matAnsSize[i].col == 0) break;
-        
-        matAnsVals[i] = (int *)malloc((matSize[i].row * matSize[i + 1].col) * sizeof(int)); //CANT BE MATSIZE, NEEDS TO BE MATANSSIZE
+        if(matSize[i].col != matSize[i+1].row) break;
+
+        matAnsSize[i].row = matSize[i].row; 
+        matAnsSize[i].col = matSize[i + 1].col;
+        matAnsVals[i] = (int *)malloc((matAnsSize[i].row * matAnsSize[i].col) * sizeof(int));
+
+        int traverse = 0;
+        //for mat1
+        //for mat2
     }
     
 /*
@@ -75,6 +84,8 @@ void mult_matrices(){
             continue;
         }
     }*/
+
+    //FREE ALL DATA THAT IS NOW UNUSED
     for(int i = 0; i < (matSize[i].row * matSize[i].col); i++){
         free(matVals[i]);
     }
@@ -103,10 +114,9 @@ void show_matrices(){ //LOGIC WORKS
     close(output);
 }
 
-//MAIN------------------------------
 int main(int argc, char *argv[]){
 
-    //START TIMER FOR WHOLE PROGRAM-----
+    //START TIMER FOR ENTIRE PROGRAM----
     uint64_t prog_diff;
     struct timespec prog_start, prog_end;
     clock_gettime(CLOCK_REALTIME, &prog_start);
